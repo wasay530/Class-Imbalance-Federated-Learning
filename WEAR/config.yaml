@@ -1,0 +1,43 @@
+# Paths
+data_dir: /home/users/sardara/LDAM/WEAR_DATASET/wear_dataset/inertial_50hz              # path to WEAR inertial_50hz dataset
+out_dir: ./experiments
+
+# Dataset
+window_size: 100                    # 2s at 50 Hz per FedFitTech
+window_stride: 50                   # 50% overlap (common practice)
+features: [
+  "right_arm_acc_x","right_arm_acc_y","right_arm_acc_z",
+  "right_leg_acc_x","right_leg_acc_y","right_leg_acc_z",
+  "left_leg_acc_x","left_leg_acc_y","left_leg_acc_z",
+  "left_arm_acc_x","left_arm_acc_y","left_arm_acc_z"
+]
+label_col: "label"
+num_classes: 19                     # 18 activities + NULL
+
+# Federated hyperparameters
+num_rounds: 100
+local_epochs: 1
+batch_size: 32
+lr: 0.0001
+weight_decay: 0.0001
+client_fraction: 1.0
+seed: 42
+
+# Methods to run (updated with proper LDAM methods)
+methods: ["FedLDAM"] # "FedAvg", "FedFitTech", "FedLDAM", "FedRAMP", "FedRatio", "FedFocal"]
+
+# LDAM-specific hyperparameters
+ldam_max_m: 0.5                     # Maximum margin (δ_max in paper)
+ldam_s: 30.0                        # Scaling factor for logits
+drw_start_round: 50                 # When to start DRW (default: halfway)
+drw_beta: 0.9999                    # DRW re-weighting parameter
+
+# Other loss-specific hyperparams
+focal_gamma: 2.0
+ratio_alpha: 1.0
+ratio_beta: 0.0
+
+# Evaluation settings
+eval_every_rounds: 1               # Evaluate every N rounds (optional)
+save_checkpoints: true              # Save intermediate model checkpoints
+

@@ -1,0 +1,36 @@
+dataset: WISDM
+data_dir: /home/users/sardara/LDAM/WISDM/Dataset/WISDM_ar_v1.1_raw.txt
+out_dir: ./experiments_WISDM
+window_size: 100
+window_stride: 50
+features:
+- x
+- y
+- z
+label_col: activity
+num_classes: 6
+methods:
+# - FedAvg
+# - FedFitTech
+- FedLDAM
+# - FedFocal
+- FedRatio
+# - FedRAMP
+seed: 42
+num_rounds: 100
+local_epochs: 1
+batch_size: 32
+lr: 0.001
+weight_decay: 0.0
+normalize_logits: true
+test_pct: 0.2
+val_pct_of_train: 0.1
+ldam_max_m: 0.5
+ldam_s: 30.0
+drw_start_round: 50
+drw_beta: 0.9999
+focal_gamma: 2.0
+ratio_alpha: 1.0
+ratio_beta: 0.0
+eval_every_rounds: 1
+save_checkpoints: true

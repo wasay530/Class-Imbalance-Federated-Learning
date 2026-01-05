@@ -1,0 +1,29 @@
+dataset: MHEALTH
+data_dir: /home/users/sardara/LDAM/WISDM/Dataset/mhealth_raw_data.csv
+out_dir: ./mhealth_without_nothing_results
+features: [alx, aly, alz, glx, gly, glz, arx, ary, arz, grx, gry, grz]
+label_col: label   # loader creates 'label' from Activity
+window_size: 100
+window_stride: 50
+num_classes: 13
+methods:
+- FedLDAM
+seed: 42
+num_rounds: 100
+clients_per_round: 10
+local_epochs: 1
+batch_size: 32
+lr: 0.001
+weight_decay: 0.0
+normalize_logits: true
+test_pct: 0.2
+val_pct_of_train: 0.1
+ldam_max_m: 0.5
+ldam_s: 30.0
+drw_start_round: 50
+drw_beta: 0.9999
+focal_gamma: 2.0
+ratio_alpha: 1.0
+ratio_beta: 0.0
+eval_every_rounds: 1
+save_checkpoints: true
